@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  db:
+    image: yandex/clickhouse-server:latest
+    restart: always
+    environment:
+      - CLICKHOUSE_DB=oddadapter
+      - CLICKHOUSE_USER=oddadapter
+      - CLICKHOUSE_PASSWORD=odd-adapter-password
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse:cached
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+  adapter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      # Cache refreshing interval (minutes):
+      - SCHEDULER_INTERVAL_MINUTES=1
+      # Clickhouse:
+      - ODD_DATA_SOURCE_NAME=db
+      - ODD_DATA_SOURCE=clickhouse
+      - CLICKHOUSE_HOST=db
+      - CLICKHOUSE_PORT=9000
+      - CLICKHOUSE_DATABASE=oddadapter
+      - CLICKHOUSE_USER=oddadapter
+      - CLICKHOUSE_PASSWORD=odd-adapter-password
+      # FLASK:
+      - FLASK_ENVIRONMENT=development
+    depends_on:
+      - db
+    ports:
+      - "127.0.0.1:8080:8080"
+
+volumes:
+  clickhouse-data:
