@@ -1,3 +1,4 @@
+import re
 from odd_contract.models import DataSetField, DataSetFieldType
 from adapter import ColumnMetadataNamedtuple, \
     _data_set_field_metadata_schema_url, _data_set_field_metadata_excluded_keys
@@ -27,11 +28,8 @@ def _map_column(mcolumn: ColumnMetadataNamedtuple, owner: str, is_key: bool = No
     dsf.parent_field_oddrn = generate_table_oddrn(database_name, table_name)
 
     dsf.type = DataSetFieldType()
-    data_type: str = mcolumn.type
-    dsf.type.type = TYPES_SQL_TO_ODD[data_type] if data_type in TYPES_SQL_TO_ODD else 'TYPE_UNKNOWN'
+    dsf.type.type, dsf.type.is_nullable = _get_column_type(mcolumn.type)
     dsf.type.logical_type = mcolumn.type
-    #dsf.type.is_nullable = True if mcolumn.is_nullable == 'YES' else False
-
     dsf.is_key = bool(is_key)
     dsf.is_value = bool(is_value)
     dsf.default_value = mcolumn.default_kind
@@ -39,3 +37,27 @@ def _map_column(mcolumn: ColumnMetadataNamedtuple, owner: str, is_key: bool = No
 
     result.append(dsf)
     return result
+
+def _get_column_type(data_type: str):
+    is_nullable = True if data_type.startswith("Nullable") else False
+
+    # trim Nullable
+    trimmed = re.search("Nullable\((.+?)\)", data_type)
+    if trimmed:
+        data_type = trimmed.group(1)
+
+    # trim LowCardinality
+    trimmed = re.search("LowCardinality\((.+?)\)", data_type)
+    if trimmed:
+        data_type = trimmed.group(1)
+
+    if data_type.startswith("Array"):
+        data_type = "Array"
+    elif data_type.startswith("Enum8"):
+        data_type = "Enum8"
+
+    if data_type in TYPES_SQL_TO_ODD:
+        d_type = TYPES_SQL_TO_ODD[data_type]
+    else:
+        d_type = 'TYPE_UNKNOWN'
+    return d_type, is_nullable

@@ -20,9 +20,9 @@ def get_env(env: str, default_value: Any = None) -> str:
 class BaseConfig:
     ODD_HOST = get_env('CLICKHOUSE_HOST', get_env('ODD_DATA_SOURCE_NAME', 'localhost'))
     ODD_PORT = get_env('CLICKHOUSE_PORT', '9000')
-    ODD_DATABASE = get_env('CLICKHOUSE_DATABASE', '')
-    ODD_USER = get_env('CLICKHOUSE_USER', '')
-    ODD_PASSWORD = get_env('CLICKHOUSE_PASSWORD', '')
+    ODD_DATABASE = get_env('CLICKHOUSE_DATABASE', 'default')
+    ODD_USER = get_env('CLICKHOUSE_USER', None)
+    ODD_PASSWORD = get_env('CLICKHOUSE_PASSWORD', None)
     ODD_SOURCE = get_env('ODD_DATA_SOURCE', 'clickhouse')
 
     SCHEDULER_INTERVAL_MINUTES = get_env('SCHEDULER_INTERVAL_MINUTES', 60)
