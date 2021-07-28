@@ -35,15 +35,15 @@ podSecurityContext:
   fsGroup: 65534
 image:
   pullPolicy: Always
-  repository: 436866023604.dkr.ecr.eu-central-1.amazonaws.com/odd-postgres-adapter
+  repository: 436866023604.dkr.ecr.eu-central-1.amazonaws.com/odd-clickhouse-adapter
   tag: ci-655380
-nameOverride: odd-postgres-adapter
+nameOverride: odd-clickhouse-adapter
 labels:
-  adapter: odd-postgres-adapter
+  adapter: odd-clickhouse-adapter
 config:
   envFrom:
   - configMapRef:
-      name: odd-postgres-adapter
+      name: odd-clickhouse-adapter
   env:
   - name: DEMO_GREETING
     value: "Hello from the environment"
