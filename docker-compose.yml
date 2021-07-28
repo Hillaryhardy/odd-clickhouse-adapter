@@ -1,13 +1,12 @@
 version: "3.8"
-
 services:
   db:
     image: yandex/clickhouse-server:21.6
     restart: always
     environment:
-      - CLICKHOUSE_DB=oddadapter
-      - CLICKHOUSE_USER=oddadapter
-      - CLICKHOUSE_PASSWORD=odd-adapter-password
+      - CLICKHOUSE_DB=${CLICKHOUSE_DATABASE}
+      - CLICKHOUSE_USER=${CLICKHOUSE_USER}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
     volumes:
       - clickhouse-data:/var/lib/clickhouse:cached
     ports:
@@ -22,15 +21,16 @@ services:
       # Cache refreshing interval (minutes):
       - SCHEDULER_INTERVAL_MINUTES=1
       # Clickhouse:
-      - ODD_DATA_SOURCE_NAME=db
-      - ODD_DATA_SOURCE=clickhouse
-      - CLICKHOUSE_HOST=db
-      - CLICKHOUSE_PORT=9000
-      - CLICKHOUSE_DATABASE=oddadapter
-      - CLICKHOUSE_USER=oddadapter
-      - CLICKHOUSE_PASSWORD=odd-adapter-password
+      - ODD_DATA_SOURCE_NAME=${ODD_DATA_SOURCE_NAME}
+      - ODD_DATA_SOURCE=${ODD_DATA_SOURCE}
+      - CLICKHOUSE_HOST=${CLICKHOUSE_HOST}
+      - CLICKHOUSE_PORT=${CLICKHOUSE_PORT}
+      - CLICKHOUSE_DATABASE=${CLICKHOUSE_DATABASE}
+      - CLICKHOUSE_USER=${CLICKHOUSE_USER}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
       # FLASK:
-      - FLASK_ENVIRONMENT=development
+      - FLASK_ENVIRONMENT=${FLASK_ENVIRONMENT}
+      - FLASK_APP=${FLASK_APP}
     depends_on:
       - db
     ports:

@@ -38,5 +38,7 @@ def create_app(conf):
         Scheduler(adapter, cache).start_scheduler(cache_refresh_interval)
         return app
 
-
-application = create_app(os.environ.get('FLASK_CONFIG') or 'config.DevelopmentConfig')
+if os.environ.get('FLASK_ENVIRONMENT') == "production":
+    application = create_app('config.ProductionConfig')
+else:
+    application = create_app('config.DevelopmentConfig')
