@@ -27,9 +27,9 @@ class BaseConfig:
 
     SCHEDULER_INTERVAL_MINUTES = get_env('SCHEDULER_INTERVAL_MINUTES', 60)
 
-    CLOUD_TYPE = "aws"
-    CLOUD_REGION = "region_1"
-    CLOUD_ACCOUNT = "account_1"
+    CLOUD_TYPE = get_env('CLOUD_TYPE', "aws")
+    CLOUD_REGION = get_env('CLOUD_REGION', "region_1")
+    CLOUD_ACCOUNT = get_env('CLOUD_ACCOUNT', "account_1")
 
     CLOUD = {
         "type": CLOUD_TYPE,
@@ -42,7 +42,7 @@ class DevelopmentConfig(BaseConfig):
 
 
 class ProductionConfig(BaseConfig):
-    FLASK_DEBUG = True
+    FLASK_DEBUG = False
 
 
 def log_env_vars(config: dict):
