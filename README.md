@@ -33,8 +33,8 @@ For more information about variables see next section.
 Adapter is ready to work out of box, but you probably will need to redefine some variables in compose .env file:
 
 ```Python
-FLASK_ENVIRONMENT = development # For production case change this to "production"
-FLASK_APP = wsgi:application # Path to wsgi module of application (required by gunicorn)
+FLASK_ENVIRONMENT = development #For production case change this to "production"
+FLASK_APP = wsgi:application #Path to wsgi module of application (required by gunicorn)
 
 CLICKHOUSE_HOST = db #Host of your ClickHouse database.
 CLICKHOUSE_PORT = 9000 #Port of your ClickHouse database.
