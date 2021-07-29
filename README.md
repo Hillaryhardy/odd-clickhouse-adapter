@@ -29,6 +29,30 @@ CLOUD_ACCOUNT=account_1
 After docker-compose run successful, application is ready to accept connection on port :8080. 
 For more information about variables see next section.
 
+#### Config for Helm:
+```
+podSecurityContext:
+  fsGroup: 65534
+image:
+  pullPolicy: Always
+  repository: 436866023604.dkr.ecr.eu-central-1.amazonaws.com/odd-clickhouse-adapter
+  tag: ci-655380
+nameOverride: odd-clickhouse-adapter
+labels:
+  adapter: odd-clickhouse-adapter
+config:
+  envFrom:
+  - configMapRef:
+      name: odd-clickhouse-adapter
+  env:
+  - name: DEMO_GREETING
+    value: "Hello from the environment"
+  - name: DEMO_FAREWELL
+    value: "Such a sweet sorrow"
+```
+More info about Helm config in https://github.com/opendatadiscovery/charts
+
+
 ## Environment
 Adapter is ready to work out of box, but you probably will need to redefine some variables in compose .env file:
 
@@ -46,9 +70,6 @@ CLOUD_TYPE = aws #Name of your cloud service. Used to form ODDRN.
 CLOUD_REGION = region_1 #Region of your cloud service. Used to form ODDRN.
 CLOUD_ACCOUNT = account_1 #Account of your cloud service. Used to form ODDRN.
 ```
-
-## Helm chart
-Link to Helm config https://github.com/opendatadiscovery/charts
 
 ## Requirements
 - Python 3.8
