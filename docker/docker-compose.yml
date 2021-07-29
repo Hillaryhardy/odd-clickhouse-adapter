@@ -14,12 +14,12 @@ services:
       - "9000:9000"
   adapter:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     restart: always
     environment:
       # Cache refreshing interval (minutes):
-      - SCHEDULER_INTERVAL_MINUTES=1
+      - SCHEDULER_INTERVAL_MINUTES=${SCHEDULER_INTERVAL_MINUTES}
       # Clickhouse:
       - ODD_DATA_SOURCE_NAME=${ODD_DATA_SOURCE_NAME}
       - ODD_DATA_SOURCE=${ODD_DATA_SOURCE}
