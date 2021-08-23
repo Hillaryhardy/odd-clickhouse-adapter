@@ -70,7 +70,7 @@ def _map_table(tables: List[tuple], columns: List[tuple]) -> List[DataEntity]:
             mcolumn: ColumnMetadataNamedtuple = ColumnMetadataNamedtuple(*column)
 
             if mcolumn.database == database_name and mcolumn.table == table_name:
-                data_entity.dataset.field_list.extend(_map_column(mcolumn, data_entity.owner, data_entity.oddrn))
+                data_entity.dataset.field_list.extend(_map_column(mcolumn, data_entity.owner))
                 column_index += 1
             else:
                 break

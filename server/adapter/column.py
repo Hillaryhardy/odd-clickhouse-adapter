@@ -8,7 +8,7 @@ from adapter.metadata import _append_metadata_extension
 from typing import List
 from app.oddrn import generate_column_oddrn, generate_table_oddrn
 
-def _map_column(mcolumn: ColumnMetadataNamedtuple, owner: str, is_key: bool = None, is_value: bool = None) -> List[DataSetField]:
+def _map_column(mcolumn: ColumnMetadataNamedtuple, owner: str, is_key: bool = False, is_value: bool = False) -> List[DataSetField]:
     result: List[DataSetField] = []
 
     database_name: str = mcolumn.database
@@ -25,13 +25,11 @@ def _map_column(mcolumn: ColumnMetadataNamedtuple, owner: str, is_key: bool = No
     _append_metadata_extension(dsf.metadata, _data_set_field_metadata_schema_url, mcolumn,
                                _data_set_field_metadata_excluded_keys)
 
-    dsf.parent_field_oddrn = generate_table_oddrn(database_name, table_name)
-
     dsf.type = DataSetFieldType()
     dsf.type.type, dsf.type.is_nullable = _get_column_type(mcolumn.type)
     dsf.type.logical_type = mcolumn.type
-    dsf.is_key = bool(is_key)
-    dsf.is_value = bool(is_value)
+    dsf.is_key = is_key
+    dsf.is_value = is_value
     dsf.default_value = mcolumn.default_kind
     dsf.description = ""
 
