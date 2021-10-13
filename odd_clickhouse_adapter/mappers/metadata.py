@@ -15,4 +15,4 @@ def _append_metadata_extension(metadata_list: List[MetadataExtension],
         for key, value in metadata.items():
             if value is not None:
                 metadata_wo_none[key] = value
-        metadata_list.append(MetadataExtension(schema_url, metadata_wo_none))
+        metadata_list.append(MetadataExtension(schema_url=schema_url, metadata=metadata_wo_none))

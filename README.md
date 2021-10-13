@@ -20,10 +20,6 @@ Strongly recommended to override next variables in docker-compose .env file:
 CLICKHOUSE_DATABASE=oddadapter
 CLICKHOUSE_USER=oddadapter
 CLICKHOUSE_PASSWORD=odd-adapter-password
-
-CLOUD_TYPE=aws
-CLOUD_REGION=region_1
-CLOUD_ACCOUNT=account_1
 ```
 
 After docker-compose run successful, application is ready to accept connection on port :8080. 
@@ -58,17 +54,13 @@ Adapter is ready to work out of box, but you probably will need to redefine some
 
 ```Python
 FLASK_ENVIRONMENT = development #For production case change this to "production"
-FLASK_APP = wsgi:application #Path to wsgi module of application (required by gunicorn)
+FLASK_APP = odd_clickhouse_adapter.wsgi:application #Path to wsgi module of application (required by gunicorn)
 
-CLICKHOUSE_HOST = db #Host of your ClickHouse database.
+CLICKHOUSE_HOST = odd-db-clickhouse #Host of your ClickHouse database.
 CLICKHOUSE_PORT = 9000 #Port of your ClickHouse database.
 CLICKHOUSE_DATABASE = oddadapter #Name of your ClickHouse database.
 CLICKHOUSE_USER = oddadapter #Username of your ClickHouse database.
 CLICKHOUSE_PASSWORD = odd-adapter-password #Password of your ClickHouse database.
-
-CLOUD_TYPE = aws #Name of your cloud service. Used to form ODDRN.
-CLOUD_REGION = region_1 #Region of your cloud service. Used to form ODDRN.
-CLOUD_ACCOUNT = account_1 #Account of your cloud service. Used to form ODDRN.
 ```
 
 ## Requirements
