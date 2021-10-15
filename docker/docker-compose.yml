@@ -1,7 +1,8 @@
 version: "3.8"
 services:
-  db:
+  db-clickhouse:
     image: yandex/clickhouse-server:21.6
+    container_name: odd-db-clickhouse
     restart: always
     environment:
       - CLICKHOUSE_DB=${CLICKHOUSE_DATABASE}
@@ -12,17 +13,16 @@ services:
     ports:
       - "8123:8123"
       - "9000:9000"
-  adapter:
+  odd-clickhouse-adapter:
     build:
       context: ..
       dockerfile: Dockerfile
+    container_name: odd-clickhouse-adapter
     restart: always
     environment:
       # Cache refreshing interval (minutes):
       - SCHEDULER_INTERVAL_MINUTES=${SCHEDULER_INTERVAL_MINUTES}
       # Clickhouse:
-      - ODD_DATA_SOURCE_NAME=${ODD_DATA_SOURCE_NAME}
-      - ODD_DATA_SOURCE=${ODD_DATA_SOURCE}
       - CLICKHOUSE_HOST=${CLICKHOUSE_HOST}
       - CLICKHOUSE_PORT=${CLICKHOUSE_PORT}
       - CLICKHOUSE_DATABASE=${CLICKHOUSE_DATABASE}
@@ -32,9 +32,11 @@ services:
       - FLASK_ENVIRONMENT=${FLASK_ENVIRONMENT}
       - FLASK_APP=${FLASK_APP}
     depends_on:
-      - db
+      - db-clickhouse
     ports:
       - "127.0.0.1:8080:8080"
+    volumes:
+      - ./../:/app/
 
 volumes:
   clickhouse-data:
