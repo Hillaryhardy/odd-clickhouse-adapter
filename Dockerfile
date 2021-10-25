@@ -28,6 +28,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
 ENV UCF_FORCE_CONFOLD=1
 ENV PYTHONUNBUFFERED=1
+ENV FLASK_APP=odd_clickhouse_adapter.wsgi:application
 
 EXPOSE 8080
 
@@ -36,4 +37,4 @@ COPY . ./
 COPY --from=build /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
 COPY --from=build /usr/local/bin/gunicorn /usr/local/bin/gunicorn
 
-ENTRYPOINT gunicorn --bind 0.0.0.0:8080 --workers=1 ${FLASK_APP} --reload
+ENTRYPOINT gunicorn --bind 0.0.0.0:8080 --workers=1 ${FLASK_APP}
