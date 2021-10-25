@@ -19,7 +19,7 @@ class ClickHouseAdapter:
         self.__database = config['ODD_DATABASE']
         self.__user = config['ODD_USER']
         self.__password = config['ODD_PASSWORD']
-        self.__oddrn_generator = ClickHouseGenerator(host_settings=f"{self.__host}:{self.__port}", databases=self.__database)
+        self.__oddrn_generator = ClickHouseGenerator(host_settings=f"{self.__host}", databases=self.__database)
 
     def get_data_source_oddrn(self) -> str:
         return self.__oddrn_generator.get_data_source_oddrn()
