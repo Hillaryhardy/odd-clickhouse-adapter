@@ -1,6 +1,6 @@
 import re
 
-from odd_contract.models import DataSetField, DataSetFieldType, Type
+from odd_models.models import DataSetField, DataSetFieldType, Type
 from oddrn_generator import ClickHouseGenerator
 
 from . import ColumnMetadataNamedtuple, _data_set_field_metadata_schema_url, _data_set_field_metadata_excluded_keys

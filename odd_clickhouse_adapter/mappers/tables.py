@@ -1,7 +1,7 @@
 from typing import List
 
 import pytz
-from odd_contract.models import DataEntity, DataSet, DataTransformer, DataEntityType
+from odd_models.models import DataEntity, DataSet, DataTransformer, DataEntityType
 from oddrn_generator import ClickHouseGenerator
 
 from . import MetadataNamedtuple, ColumnMetadataNamedtuple, _data_set_metadata_schema_url, \

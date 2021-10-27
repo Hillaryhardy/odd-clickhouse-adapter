@@ -1,4 +1,4 @@
-from odd_contract.models import Type, DataEntityType
+from odd_models.models import Type, DataEntityType
 
 
 TYPES_SQL_TO_ODD = {

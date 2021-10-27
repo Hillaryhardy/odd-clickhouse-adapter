@@ -2,7 +2,7 @@ import logging
 from typing import List
 
 from clickhouse_driver import connect
-from odd_contract.models import DataEntity
+from odd_models.models import DataEntity
 from oddrn_generator import ClickHouseGenerator
 
 from .mappers import _table_select, _column_select
