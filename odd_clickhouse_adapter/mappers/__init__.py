@@ -14,7 +14,11 @@ _table_metadata: str = \
     'total_bytes, metadata_path, data_paths, is_temporary, ' \
     'create_table_query, metadata_modification_time'
 
-_table_select = '''
+# integration_engines = ('PostgreSQL', 'RabbitMQ', 'Kafka', 'MySQL',
+#                        'HDFS', 'S3', 'EmbeddedRocksDB', 'JDBC', 'MongoDB', 'ODBC')
+integration_engines = ('Kafka',)
+
+_table_select = f"""
 select t.name,
     t.database,
     t.engine,
@@ -27,8 +31,9 @@ select t.name,
     t.create_table_query,
     t.metadata_modification_time
 from system.tables t
-where t.database = %(database)s
-'''
+where t.database = %(database)s 
+and t.engine not in {integration_engines}
+"""
 
 _data_set_field_metadata_excluded_keys: set = \
     {'database', 'table', 'name', 'type',
@@ -40,7 +45,7 @@ _column_metadata: str = \
     'comment, is_in_partition_key, is_in_sorting_key, ' \
     'is_in_primary_key, is_in_sampling_key, compression_codec'
 
-_column_select: str = '''
+_column_select: str = f"""
 select 
     c.database, 
     c.table, 
@@ -59,8 +64,21 @@ select
     c.is_in_sampling_key,
     c.compression_codec
 from system.columns c
+join system.tables t on (t.database = c.database and t.name = c.table )
 where c.database = %(database)s
-'''
+and t.engine not in {integration_engines}
+"""
+
+_integration_engines_select = f"""
+select
+    t.name,
+    t.engine,
+    t.engine_full
+from system.tables t
+where t.database = %(database)s
+and t.engine in {integration_engines}
+"""
 
 MetadataNamedtuple = namedtuple('MetadataNamedtuple', _table_metadata)
 ColumnMetadataNamedtuple = namedtuple('ColumnMetadataNamedtuple', _column_metadata)
+IntgrEngineNamedtuple = namedtuple('IntgrEngineNamedtuple', "table, name, settings")

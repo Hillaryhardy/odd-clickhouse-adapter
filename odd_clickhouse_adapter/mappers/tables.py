@@ -1,16 +1,18 @@
 from typing import List
 
 import pytz
-from odd_models.models import DataEntity, DataSet, DataTransformer, DataEntityType
+from odd_models.models import DataEntity, DataSet, DataEntityType
 from oddrn_generator import ClickHouseGenerator
 
 from . import MetadataNamedtuple, ColumnMetadataNamedtuple, _data_set_metadata_schema_url, \
     _data_set_metadata_excluded_keys
 from .columns import map_column
 from .metadata import _append_metadata_extension
+from .transformer import extract_transformer_data
 
 
-def map_table(oddrn_generator: ClickHouseGenerator, tables: List[tuple], columns: List[tuple]) -> List[DataEntity]:
+def map_table(oddrn_generator: ClickHouseGenerator,
+              tables: List[tuple], columns: List[tuple], integration_engines: List[tuple]) -> List[DataEntity]:
     data_entities: List[DataEntity] = []
     column_index: int = 0
 
@@ -25,7 +27,7 @@ def map_table(oddrn_generator: ClickHouseGenerator, tables: List[tuple], columns
             owner=None,
             description=None,
             metadata=[],
-            type=DataEntityType.VIEW if mtable.engine == "View" else DataEntityType.TABLE,
+            type=DataEntityType.VIEW if mtable.engine in ["View", "MaterializedView"] else DataEntityType.TABLE,
         )
         data_entities.append(data_entity)
 
@@ -43,12 +45,8 @@ def map_table(oddrn_generator: ClickHouseGenerator, tables: List[tuple], columns
         )
 
         # DataTransformer
-        if data_entity.type == 'VIEW':  # data_entity.dataset.subtype == 'DATASET_VIEW'
-            data_entity.data_transformer = DataTransformer(
-                inputs=[],
-                outputs=[],
-                sql=mtable.create_table_query,
-            )
+        if data_entity.type == DataEntityType.VIEW:
+            data_entity.data_transformer = extract_transformer_data(mtable, oddrn_generator, integration_engines)
 
         # DatasetField
         while column_index < len(columns):

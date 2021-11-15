@@ -1,4 +1,4 @@
-from odd_models.models import Type, DataEntityType
+from odd_models.models import Type
 
 
 TYPES_SQL_TO_ODD = {
@@ -7,10 +7,14 @@ TYPES_SQL_TO_ODD = {
     "DateTime64": Type.TYPE_DATETIME,
 
     "String": Type.TYPE_STRING,
+    "FixedString": Type.TYPE_STRING,
     "UUID": Type.TYPE_STRING,
+    "IPv4": Type.TYPE_STRING,
     "IPv6": Type.TYPE_STRING,
 
     "Enum8": Type.TYPE_INTEGER,
+
+    "Decimal": Type.TYPE_NUMBER,
 
     "Float32": Type.TYPE_NUMBER,
     "Float64": Type.TYPE_NUMBER,
@@ -25,5 +29,5 @@ TYPES_SQL_TO_ODD = {
     "UInt32": Type.TYPE_INTEGER,
     "UInt64": Type.TYPE_INTEGER,
 
-    "Array": Type.TYPE_LIST
+    "Array": Type.TYPE_LIST,
 }

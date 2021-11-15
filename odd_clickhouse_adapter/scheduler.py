@@ -22,6 +22,6 @@ class Scheduler:
                                  next_run_time=datetime.now())
 
     def __retrieve_data_entities(self):
-        datasets = self.__adapter.get_datasets()
-        self.__cache.cache_data_entities(datasets, [], [])
+        datasets = self.__adapter.get_data_entities()
+        self.__cache.cache_data_entities(datasets)
         logging.info(f'Put {len(datasets)} Datasets DataEntities to cache from database')
