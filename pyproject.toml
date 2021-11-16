@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "odd-clickhouse-adapter"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["Ruslan Ibragimov <ribragimov@provectus.com>"]
 
@@ -12,7 +12,7 @@ clickhouse-driver = "^0.2.1"
 APScheduler = "^3.7.0"
 psycopg2-binary = "^2.9.1"
 oddrn-generator = "^0.1.3"
-odd-models = "^1.0.4"
+odd-models = "^1.0.9"
 
 [tool.poetry.dev-dependencies]
 

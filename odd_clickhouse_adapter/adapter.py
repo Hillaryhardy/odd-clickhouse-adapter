@@ -5,7 +5,7 @@ from clickhouse_driver import connect
 from odd_models.models import DataEntity
 from oddrn_generator import ClickHouseGenerator
 
-from .mappers import _table_select, _column_select
+from .mappers import _table_select, _column_select, _integration_engines_select
 from .mappers.tables import map_table
 
 
@@ -24,7 +24,7 @@ class ClickHouseAdapter:
     def get_data_source_oddrn(self) -> str:
         return self.__oddrn_generator.get_data_source_oddrn()
 
-    def get_datasets(self) -> List[DataEntity]:
+    def get_data_entities(self) -> List[DataEntity]:
         try:
             self.__connect()
             params = {
@@ -32,19 +32,13 @@ class ClickHouseAdapter:
             }
             tables = self.__execute(_table_select, params)
             columns = self.__execute(_column_select, params)
-
-            return map_table(self.__oddrn_generator, tables, columns)
+            integration_engines = self.__execute(_integration_engines_select, params)
+            return map_table(self.__oddrn_generator, tables, columns, integration_engines)
         except Exception as e:
             logging.error('Failed to load metadata for tables')
             logging.exception(e)
         finally:
             self.__disconnect()
-        return []
-
-    def get_data_transformers(self) -> List[DataEntity]:
-        return []
-
-    def get_data_transformer_runs(self) -> List[DataEntity]:
         return []
 
     def __execute(self, query: str, params: dict = None) -> List[tuple]:

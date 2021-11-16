@@ -13,10 +13,8 @@ class Cache:
 
     def cache_data_entities(self,
                             datasets: Iterable[DataEntity],
-                            data_transformers: Iterable[DataEntity],
-                            data_transformer_runs: Iterable[DataEntity],
                             updated_at: datetime = datetime.now()):
-        self.__DATA_ENTITIES = list(chain(datasets, data_transformers, data_transformer_runs)), updated_at
+        self.__DATA_ENTITIES = list(datasets), updated_at
 
     def retrieve_data_entities(self, changed_since: datetime = None) -> Union[CacheEntry, None]:
         if self.__DATA_ENTITIES is None:
