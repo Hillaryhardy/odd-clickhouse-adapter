@@ -39,7 +39,6 @@ def map_table(oddrn_generator: ClickHouseGenerator,
 
         # Dataset
         data_entity.dataset = DataSet(
-            parent_oddrn=oddrn_generator.get_oddrn_by_path('databases'),
             rows_number=int(mtable.total_rows) if mtable.total_rows is not None else None,
             field_list=[]
         )
