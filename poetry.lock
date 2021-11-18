@@ -280,7 +280,7 @@ sqlparse = "0.4.2"
 
 [[package]]
 name = "oddrn-generator"
-version = "0.1.13"
+version = "0.1.19.dev0"
 description = "Open Data Discovery Resource Name Generator"
 category = "main"
 optional = false
@@ -478,7 +478,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "73f54c8221003e528d3842d688c0b149f5369ac896ee6373171e4243787e7cf4"
+content-hash = "1f92c364d53117326dae647b714b3ed51222a95a3472815a625557a23e43addf"
 
 [metadata.files]
 apscheduler = [
@@ -574,6 +574,13 @@ clickclick = [
 ]
 clickhouse-driver = [
     {file = "clickhouse-driver-0.2.2.tar.gz", hash = "sha256:d16cfae6d3085854ebdef47a7920ce2ef839bde44c60a64d7963a8c9834d7440"},
+    {file = "clickhouse_driver-0.2.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:96af5d26ed7b4e6a0eebcf95846c921e3311e73aa6bda98bc33633e7e59a183c"},
+    {file = "clickhouse_driver-0.2.2-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ab029ba9bed6ff1118190fd05bdf001bd085a72caeb1fbb23fc6e8a0a5cc2bbd"},
+    {file = "clickhouse_driver-0.2.2-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:817426d25024fb31d2b6b87f5ddbc0b94881ea73305180f693fa7c9b54ba12c3"},
+    {file = "clickhouse_driver-0.2.2-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:fcfc774aa36fdfdcd6a53053dbcd8c2da3046c68e4005b0cba7aa7c3677bafe7"},
+    {file = "clickhouse_driver-0.2.2-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:568586e3bf901516582ee11705e9aa97ee187bd7bd0cef42d762751352b3aecd"},
+    {file = "clickhouse_driver-0.2.2-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:a4d0de837557468f3097443b8414868440792da2d0e167e21c7d725f0122beb6"},
+    {file = "clickhouse_driver-0.2.2-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:4712143e554bc0e32c4a0a12c0b04ca2e1ab9ac0b541916cc598bbb03267af9e"},
     {file = "clickhouse_driver-0.2.2-cp35-cp35m-macosx_10_9_x86_64.whl", hash = "sha256:56ec4ad0880072b990b3f55a1ea5b23439cf43908024b6330853ebb5edacc45d"},
     {file = "clickhouse_driver-0.2.2-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:eece04cadf0bf19a063869c39456c5eb4ed14ec19b4fed089615a0aff38c3e73"},
     {file = "clickhouse_driver-0.2.2-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:b015664786376421c08e4e9a02c4976784e858be191c0adda24fb4ae6e15f9ee"},
@@ -743,8 +750,8 @@ odd-models = [
     {file = "odd_models-1.0.9-py3-none-any.whl", hash = "sha256:b785a9a6e4a3f3036490fe513e8b00f5a6caecd28fb1afe8a3d8ffec5f96924d"},
 ]
 oddrn-generator = [
-    {file = "oddrn-generator-0.1.13.tar.gz", hash = "sha256:1b2de60365ae9475b1a11d55ae9703d8a9407823b5ef4783c38f86a7138c8363"},
-    {file = "oddrn_generator-0.1.13-py3-none-any.whl", hash = "sha256:d46f4c47fb68d5e5498f863786a6acb841aef3cc2b768d3841c22ab3b0442788"},
+    {file = "oddrn-generator-0.1.19.dev0.tar.gz", hash = "sha256:390ba746bd206adc0fc0a7ce90231cfaedc6b5b1f31b1aeea57413510df4550b"},
+    {file = "oddrn_generator-0.1.19.dev0-py3-none-any.whl", hash = "sha256:57846cec41e5200028e3d3bd280491809b7e6a5ed0f4882e89fb14d0731879b0"},
 ]
 openapi-schema-validator = [
     {file = "openapi-schema-validator-0.1.5.tar.gz", hash = "sha256:a4b2712020284cee880b4c55faa513fbc2f8f07f365deda6098f8ab943c9f0df"},

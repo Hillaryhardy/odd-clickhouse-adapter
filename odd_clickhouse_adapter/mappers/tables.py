@@ -20,14 +20,17 @@ def map_table(oddrn_generator: ClickHouseGenerator,
         mtable: MetadataNamedtuple = MetadataNamedtuple(*table)
         table_name: str = mtable.name
 
+        data_entity_type = DataEntityType.VIEW if mtable.engine in ["View", "MaterializedView"] else DataEntityType.TABLE
+        oddrn_path = "views" if data_entity_type == DataEntityType.VIEW else "tables"
+
         # DataEntity
         data_entity: DataEntity = DataEntity(
-            oddrn=oddrn_generator.get_oddrn_by_path('tables', table_name),
+            oddrn=oddrn_generator.get_oddrn_by_path(oddrn_path, table_name),
             name=table_name,
             owner=None,
             description=None,
             metadata=[],
-            type=DataEntityType.VIEW if mtable.engine in ["View", "MaterializedView"] else DataEntityType.TABLE,
+            type=data_entity_type,
         )
         data_entities.append(data_entity)
 
@@ -53,7 +56,7 @@ def map_table(oddrn_generator: ClickHouseGenerator,
             mcolumn: ColumnMetadataNamedtuple = ColumnMetadataNamedtuple(*column)
 
             if mcolumn.table == table_name:
-                data_entity.dataset.field_list.append(map_column(mcolumn, oddrn_generator, data_entity.owner))
+                data_entity.dataset.field_list.append(map_column(mcolumn, oddrn_generator, data_entity.owner, oddrn_path))
                 column_index += 1
             else:
                 break
