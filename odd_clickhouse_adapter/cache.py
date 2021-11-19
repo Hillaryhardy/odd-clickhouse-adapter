@@ -3,6 +3,7 @@ from datetime import datetime
 from itertools import chain
 from typing import List, Union, Iterable, Tuple
 
+import pytz
 from odd_models.models import DataEntity
 
 CacheEntry = Tuple[List[DataEntity], datetime]
@@ -13,7 +14,7 @@ class Cache:
 
     def cache_data_entities(self,
                             datasets: Iterable[DataEntity],
-                            updated_at: datetime = datetime.now()):
+                            updated_at: datetime = datetime.now(tz=pytz.UTC)):
         self.__DATA_ENTITIES = list(datasets), updated_at
 
     def retrieve_data_entities(self, changed_since: datetime = None) -> Union[CacheEntry, None]:

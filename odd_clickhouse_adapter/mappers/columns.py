@@ -9,10 +9,10 @@ from .types import TYPES_SQL_TO_ODD
 
 
 def map_column(
-        mcolumn: ColumnMetadataNamedtuple, oddrn_generator: ClickHouseGenerator, owner: str
+        mcolumn: ColumnMetadataNamedtuple, oddrn_generator: ClickHouseGenerator, owner: str, parent_oddrn_path: str
 ) -> DataSetField:
     dsf: DataSetField = DataSetField(
-        oddrn=oddrn_generator.get_oddrn_by_path("columns", mcolumn.name),
+        oddrn=oddrn_generator.get_oddrn_by_path(f"{parent_oddrn_path}_columns", mcolumn.name),  # getting tables_columns or views_columns
         name=mcolumn.name,
         owner=owner,
         metadata=[],
