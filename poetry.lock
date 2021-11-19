@@ -280,7 +280,7 @@ sqlparse = "0.4.2"
 
 [[package]]
 name = "oddrn-generator"
-version = "0.1.19.dev0"
+version = "0.1.18"
 description = "Open Data Discovery Resource Name Generator"
 category = "main"
 optional = false
@@ -478,7 +478,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1f92c364d53117326dae647b714b3ed51222a95a3472815a625557a23e43addf"
+content-hash = "0e0458ae76299301eaaa1670674abcd93353bdd6c9d358626b77cf68073af9cb"
 
 [metadata.files]
 apscheduler = [
@@ -750,8 +750,8 @@ odd-models = [
     {file = "odd_models-1.0.9-py3-none-any.whl", hash = "sha256:b785a9a6e4a3f3036490fe513e8b00f5a6caecd28fb1afe8a3d8ffec5f96924d"},
 ]
 oddrn-generator = [
-    {file = "oddrn-generator-0.1.19.dev0.tar.gz", hash = "sha256:390ba746bd206adc0fc0a7ce90231cfaedc6b5b1f31b1aeea57413510df4550b"},
-    {file = "oddrn_generator-0.1.19.dev0-py3-none-any.whl", hash = "sha256:57846cec41e5200028e3d3bd280491809b7e6a5ed0f4882e89fb14d0731879b0"},
+    {file = "oddrn-generator-0.1.18.tar.gz", hash = "sha256:bda88195297e5fff879dfbf0e0314869acd49da832c60bf0efcca4edc4490347"},
+    {file = "oddrn_generator-0.1.18-py3-none-any.whl", hash = "sha256:12789e6a7930f708abfd405e1119d177fbfcfae5a8016787ed6fb3911437bb97"},
 ]
 openapi-schema-validator = [
     {file = "openapi-schema-validator-0.1.5.tar.gz", hash = "sha256:a4b2712020284cee880b4c55faa513fbc2f8f07f365deda6098f8ab943c9f0df"},
