@@ -53,9 +53,6 @@ More info about Helm config in https://github.com/opendatadiscovery/charts
 Adapter is ready to work out of box, but you probably will need to redefine some variables in compose .env file:
 
 ```Python
-FLASK_ENVIRONMENT = development #For production case change this to "production"
-FLASK_APP = odd_clickhouse_adapter.wsgi:application #Path to wsgi module of application (required by gunicorn)
-
 CLICKHOUSE_HOST = odd-db-clickhouse #Host of your ClickHouse database.
 CLICKHOUSE_PORT = 9000 #Port of your ClickHouse database.
 CLICKHOUSE_DATABASE = oddadapter #Name of your ClickHouse database.
