@@ -10,8 +10,7 @@ env:
 
 jobs:
   build_and_push:
-    permissions:
-      packages: write
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
